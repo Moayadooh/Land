@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="سالم الفلاحي" />
+  <meta name="description" content="ارض سكنية للبيع" />
+  <meta property="og:title" content="سالم الفلاحي" />
+  <meta property="og:description" content="ارض سكنية للبيع" />
+  <meta property="og:image" content="images/land1.jpg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أرض سكنية للبيع</title>
+  <link rel="icon" type="image/x-icon" href="images/land1.jpg" />
+  <link rel="apple-touch-icon" href="images/land1.jpg" />
+  <style>
+    /* Added Arabic fonts for better readability */
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px 16px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .header {
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .header .location {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-top: 4px;
+    }
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 850px) {
+      .grid-layout {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+
+    /* Gallery */
+    .gallery-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .main-image-wrap {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      background: #1e293b;
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .main-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.2s ease;
+    }
+
+    /* Adjusted for RTL */
+    .doc-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(15, 23, 42, 0.85);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Changed from 7 to 6 columns for 5 photos + 1 document */
+    .thumbnails {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+    }
+
+    .thumb {
+      position: relative;
+      height: 70px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      opacity: 0.7;
+      transition: all 0.2s;
+    }
+
+    .thumb.active,
+    .thumb:hover {
+      opacity: 1;
+      border-color: var(--primary);
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Adjusted badge location for RTL */
+    .thumb.survey-thumb::after {
+      content: "الرسم المساحي";
+      position: absolute;
+      bottom: 3px;
+      left: 3px;
+      background: #dc2626;
+      color: white;
+      font-size: 9px;
+      font-weight: bold;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    /* Specs Grid */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+    }
+
+    .spec-item {
+      background: var(--bg);
+      padding: 12px;
+      border-radius: 8px;
+    }
+
+    .spec-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .spec-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* Contact Sidebar */
+    .sticky-card {
+      position: sticky;
+      top: 24px;
+    }
+
+    .price-tag {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .contact-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--primary);
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      margin-bottom: 10px;
+      transition: background 0.2s;
+    }
+
+    .contact-btn:hover {
+      background: var(--primary-hover);
+    }
+
+    .contact-btn.whatsapp {
+      background: #25d366;
+    }
+
+    .contact-btn.whatsapp:hover {
+      background: #1eb956;
+    }
+
+    .contact-info-list {
+      margin-top: 16px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .contact-info-list div {
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .contact-info-list strong {
+      color: var(--text);
+    }
+
+    /* Lightbox Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    /* Adjusted close button for RTL */
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      left: 25px;
+      color: white;
+      font-size: 35px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>أرض سكنية للبيع</h1>
+      <div class="location">📍 جنوب الباطنة، بركاء، الخويرات، مربع 4، قطعة 1512</div>
+    </div>
+
+    <div class="grid-layout">
+      <!-- Main Section -->
+      <div>
+        <div class="card gallery-container">
+          <div class="main-image-wrap" onclick="openLightbox()">
+            <span class="doc-badge" id="imageBadge" style="display:none;">الرسم المساحي (الكروكي)</span>
+            <img id="mainImage" src="images/land1.jpg" alt="صورة الأرض 1">
+          </div>
+
+          <div class="thumbnails">
+            <!-- 5 Land Photos -->
+            <div class="thumb active" onclick="switchImage('images/land1.jpg', false, this)"><img src="images/land1.jpg"
+                alt="أرض 1"></div>
+            <div class="thumb" onclick="switchImage('images/land2.jpg', false, this)"><img src="images/land2.jpg"
+                alt="أرض 2"></div>
+            <div class="thumb" onclick="switchImage('images/land3.jpg', false, this)"><img src="images/land3.jpg"
+                alt="أرض 3"></div>
+            <div class="thumb" onclick="switchImage('images/land4.jpg', false, this)"><img src="images/land4.jpg"
+                alt="أرض 4"></div>
+            <div class="thumb" onclick="switchImage('images/land5.jpg', false, this)"><img src="images/land5.jpg"
+                alt="أرض 5"></div>
+
+            <!-- 1 Survey Document Photo -->
+            <div class="thumb survey-thumb" onclick="switchImage('images/survey.jpg', true, this)"><img
+                src="images/survey.jpg" alt="الرسم المساحي"></div>
+          </div>
+        </div>
+
+        <!-- Specs -->
+        <div class="card">
+          <h2>تفاصيل العقار</h2>
+          <div class="specs-grid">
+            <div class="spec-item">
+              <div class="spec-label">نوع العقار</div>
+              <div class="spec-value">أرض سكنية</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">مساحة الأرض</div>
+              <div class="spec-value">603 متر مربع</div>
+            </div>
+            <!-- <div class="spec-item"><div class="spec-label">الأبعاد</div><div class="spec-value">20م × 30م</div></div> -->
+            <!-- <div class="spec-item"><div class="spec-label">الاستخدام</div><div class="spec-value">سكني فقط</div></div> -->
+            <!-- <div class="spec-item"><div class="spec-label">نوع الملكية</div><div class="spec-value">ملك حر</div></div> -->
+            <div class="spec-item">
+              <div class="spec-label">الرسم المساحي</div>
+              <div class="spec-value">مرفق ومعتمد</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="card">
+          <h2>الوصف</h2>
+          <p>قطعة أرض سكنية مستوية وجاهزة للبناء تقع في حي هادئ وحديث. تتميز بوصول مباشر إلى طرق معبدة مع توفر خدمات
+            الكهرباء والمياه وشبكة الألياف البصرية على حدود الأرض.</p>
+          <br>
+          <p>الأرض ممهدة بالكامل ولا توجد بها ميول أو تكوينات صخرية، مما يقلل من تكاليف الأساسات بشكل كبير. قريبة من
+            المدارس والمراكز التجارية المحلية. تم إرفاق الرسم المساحي (الكروكي) أعلاه للتحقق من الأبعاد الدقيقة للقطعة.
+          </p>
+        </div>
+
+        <!-- Google Map Section -->
+        <div class="card">
+          <h2>الموقع على الخريطة</h2>
+          <div class="map-container">
+            <!-- قم باستبدال رابط src أدناه برابط تضمين الخريطة الخاص بموقع الأرض -->
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d4127.67983389333!2d57.89933858940707!3d23.69892843607191!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjPCsDQxJzQzLjkiTiA1N8KwNTMnNTUuOSJF!5e1!3m2!1sen!2som!4v1787488946716!5m2!1sen!2som"
+              allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="card sticky-card">
+          <div class="price-tag">23,500 ر.ع</div>
+
+          <a href="tel:+96899245075" class="contact-btn">📞 اتصل بالبائع</a>
+          <a href="https://wa.me/96899245075?text=أنا%20مهتم%20بالأرض%20السكنية%20المعروضة%20للبيع"
+            class="contact-btn whatsapp" target="_blank">💬 تواصل عبر واتساب</a>
+          <!-- <a href="mailto:seller@example.com?subject=استفسار%20عن%20الأرض%20السكنية" class="contact-btn" style="background:#475569;">✉️ أرسل بريد إلكتروني</a> -->
+
+          <div class="contact-info-list">
+            <div><span>جهة الاتصال:</span> <strong>سالم الفلاحي</strong></div>
+            <div><span>رقم الهاتف:</span> <strong>5075 9924 968+</strong></div>
+            <!-- <div><span>رقم المرجع:</span> <strong>#102-B4</strong></div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Zoom -->
+  <div id="lightbox" class="modal" onclick="closeLightbox()">
+    <span class="modal-close">&times;</span>
+    <img id="lightboxImg" src="" alt="عرض مكبر">
+  </div>
+
+  <script>
+    function switchImage(src, isSurvey, element) {
+      const mainImg = document.getElementById('mainImage');
+      const badge = document.getElementById('imageBadge');
+
+      mainImg.src = src;
+      badge.style.display = isSurvey ? 'block' : 'none';
+
+      document.querySelectorAll('.thumb').forEach(thumb => thumb.classList.remove('active'));
+      element.classList.add('active');
+    }
+
+    function openLightbox() {
+      document.getElementById('lightboxImg').src = document.getElementById('mainImage').src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+  </script>
+
+</body>
+
+</html>
