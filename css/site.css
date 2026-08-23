@@ -1,0 +1,270 @@
+/* Added Arabic fonts for better readability */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 24px 16px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.header {
+    margin-bottom: 24px;
+}
+
+.header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.header .location {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-top: 4px;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+@media (min-width: 850px) {
+    .grid-layout {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+/* Gallery */
+.gallery-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.main-image-wrap {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    background: #1e293b;
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.main-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.2s ease;
+}
+
+/* Adjusted for RTL */
+.doc-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(15, 23, 42, 0.85);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+}
+
+/* Changed from 7 to 6 columns for 5 photos + 1 document */
+.thumbnails {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.thumb {
+    position: relative;
+    height: 70px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    opacity: 0.7;
+    transition: all 0.2s;
+}
+
+.thumb.active,
+.thumb:hover {
+    opacity: 1;
+    border-color: var(--primary);
+}
+
+.thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Adjusted badge location for RTL */
+.thumb.survey-thumb::after {
+    content: "الرسم المساحي";
+    position: absolute;
+    bottom: 3px;
+    left: 3px;
+    background: #dc2626;
+    color: white;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+
+/* Cards */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+}
+
+/* Specs Grid */
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+}
+
+.spec-item {
+    background: var(--bg);
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.spec-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.spec-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 2px;
+}
+
+/* Contact Sidebar */
+.sticky-card {
+    position: sticky;
+    top: 24px;
+}
+
+.price-tag {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 16px;
+}
+
+.contact-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--primary);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    margin-bottom: 10px;
+    transition: background 0.2s;
+}
+
+.contact-btn:hover {
+    background: var(--primary-hover);
+}
+
+.contact-btn.whatsapp {
+    background: #25d366;
+}
+
+.contact-btn.whatsapp:hover {
+    background: #1eb956;
+}
+
+.contact-info-list {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.contact-info-list div {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-info-list strong {
+    color: var(--text);
+}
+
+/* Lightbox Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* Adjusted close button for RTL */
+.modal-close {
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
+}
