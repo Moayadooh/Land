@@ -129,7 +129,7 @@ body {
 
 /* Adjusted badge location for RTL */
 .thumb.survey-thumb::after {
-    content: "الرسم المساحي";
+    content: "مستند";
     position: absolute;
     bottom: 3px;
     left: 3px;
